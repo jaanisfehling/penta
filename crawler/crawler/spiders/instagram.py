@@ -1,11 +1,11 @@
-import scrapy
+import scrapy, json
 
 
 class Instagram(scrapy.Spider):
     name = "instagram"
 
 
-    def __init__(self, filepath, first=50, **kwargs):
+    def __init__(self, filepath="IDs.txt", first=50, **kwargs):
         super().__init__(**kwargs)
         self.filepath = filepath
         # Get Posts
@@ -22,10 +22,23 @@ class Instagram(scrapy.Spider):
 
     def start_requests(self):
         with open(self.filepath, "r") as f:
-            urls = f.readlines()
-        for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse)
+            IDs = f.readlines()
+
+        # Scrape Profiles
+        for ID in IDs:
+            url = self.posts_url.format(ID, self.first, self.standart_after)
+            page = scrapy.Request(url=url, callback=self.parse)
+            # Scrape Posts
+            for post in page['data']:
+                url =
+                comments =
+                # Scrape Comments
+                for comment in comments['data']:
+
+
+
+
+
 
     def parse(self, response):
-        with open("page.html", 'wb') as f:
-            f.write(response.body)
+        yield response.body
