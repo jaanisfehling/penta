@@ -6,7 +6,8 @@
 import scrapy
 
 
-class CrawlerItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
+class CommentItem(scrapy.Item):
+    username = scrapy.Field()
+    id = scrapy.Field()
+    text = scrapy.Field()
     pass

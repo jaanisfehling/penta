@@ -5,7 +5,7 @@ class Instagram(scrapy.Spider):
     name = "instagram"
 
 
-    def __init__(self, filepath="IDs.txt", first=50, **kwargs):
+    def __init__(self, filepath="IDs.json", first=50, **kwargs):
         super().__init__(**kwargs)
         self.filepath = filepath
         # Get Posts
@@ -22,23 +22,30 @@ class Instagram(scrapy.Spider):
 
     def start_requests(self):
         with open(self.filepath, "r") as f:
-            IDs = f.readlines()
+            IDs = json.load(f)
 
         # Scrape Profiles
         for ID in IDs:
             url = self.posts_url.format(ID, self.first, self.standart_after)
-            page = scrapy.Request(url=url, callback=self.parse)
+            page = scrapy.Request(url=url, callback=self.parse_page)
             # Scrape Posts
-            for post in page['data']:
-                url =
-                comments =
-                # Scrape Comments
-                for comment in comments['data']:
+            for shortcode in page:
+                url = self.comments_url.format(shortcode, self.first, self.standart_after)
+                comments = scrapy.Request(url=url, callback=self.parse_post())
 
 
 
 
 
 
-    def parse(self, response):
-        yield response.body
+
+    def parse_page(self, response):
+        # extract shortcodes
+        for edge in response['data']['user']['edge_owner_to_timeline_media']['edges']:
+            yield edge['node']['shortcode']
+
+    def parse_post(self, response):
+        # extract comments
+        for edge in response['data']['shortcode_media']['edge_media_to_parent_comment']['edges']:
+            # ((username, id), text)
+            yield ((edge['node']['owner']['username'], edge['node']['owner']['id']), edge['node']['text'])
