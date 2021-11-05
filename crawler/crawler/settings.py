@@ -8,7 +8,7 @@ NEWSPIDER_MODULE = 'crawler.spiders'
 #USER_AGENT = 'crawler (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -54,7 +54,6 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {'crawler.pipelines.MongoPipeline': 300}
-
 MONGO_URI = 'mongodb://localhost:27017'
 MONGO_DATABASE = 'instagramDB'
 
