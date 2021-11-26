@@ -25,14 +25,7 @@ class Instagram(scrapy.Spider):
         for ID in IDs:
             url = self.posts_url.format(ID, self.first, self.standard_after)
             yield scrapy.Request(url=url,  callback=self.parse,
-                                 cookies={'csrftoken': 'rPv7XKXSDzpopZzKzHSsD2K8aXNYOR6i',
-                                          'datr': 'DbJYYVGxT4ij2e6mxW6pGpKx',
-                                          'ds_user_id': '49833673560',
-                                          'ig_did': 'EC4F4E00-D29B-4951-8455-F0FC6E5D4185',
-                                          'mid': 'YVXmyAALAAGN73VoK3-lG9B_klr5',
-                                          'sessionid': '49833673560%3Ac5gSLvrClQbd4L%3A15',
-                                          'shbid': '\"3776\\0542075502672\\0541667403400:01f7eb6903eb647e4d2e5a9e64215d5f10311bb5aa5f528e0e3257d0c0643c2b579583a7\"',
-                                          'shbts': '\"1635867400\\0542075502672\\0541667403400:01f785f66992392e6a6abd0d7ee09d392f0b73696c03291a48601b4e670c6eea898cc883\"'})
+                                 cookies={})
 
 
 
@@ -43,14 +36,7 @@ class Instagram(scrapy.Spider):
             # Scrape posts
             next_page = self.comments_url.format(edge['node']['shortcode'], self.first, self.standard_after)
             yield scrapy.Request(url=next_page, callback=self.parse_comments,
-                                 cookies={'csrftoken': 'rPv7XKXSDzpopZzKzHSsD2K8aXNYOR6i',
-                                          'datr': 'DbJYYVGxT4ij2e6mxW6pGpKx',
-                                          'ds_user_id': '49833673560',
-                                          'ig_did': 'EC4F4E00-D29B-4951-8455-F0FC6E5D4185',
-                                          'mid': 'YVXmyAALAAGN73VoK3-lG9B_klr5',
-                                          'sessionid': '49833673560%3Ac5gSLvrClQbd4L%3A15',
-                                          'shbid': '\"3776\\0542075502672\\0541667403400:01f7eb6903eb647e4d2e5a9e64215d5f10311bb5aa5f528e0e3257d0c0643c2b579583a7\"',
-                                          'shbts': '\"1635867400\\0542075502672\\0541667403400:01f785f66992392e6a6abd0d7ee09d392f0b73696c03291a48601b4e670c6eea898cc883\"'})
+                                 cookies={})
 
 
 
