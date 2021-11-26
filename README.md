@@ -1,1 +1,1 @@
-Instagram Comment Scraper + Comment Data Annotator for the Big-Five Psychological Modell
+Instagram comment scraper + comment data annotator for the Big-Five psychological modell
